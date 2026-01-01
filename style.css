@@ -1,0 +1,278 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Oswald', sans-serif;
+    background-color: #f5f5f5;
+    color: #333333;
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+/* Header */
+header {
+    padding: 80px 120px 60px;
+    text-align: left;
+}
+
+.main-logo {
+    width: auto;
+    height: 80px;
+    margin-bottom: 40px;
+    display: block;
+}
+
+.header-info {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.info-left {
+    text-align: left;
+}
+
+.info-right {
+    text-align: right;
+}
+
+.header-info p {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #666666;
+    line-height: 1.8;
+    margin: 0;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Showcase Layout */
+.showcase {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    padding: 0 120px 80px;
+}
+
+.showcase-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+}
+
+.showcase-item {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.image-container {
+    width: 100%;
+    background: transparent;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.showcase-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+}
+
+.sub-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    font-weight: 400; /* Bebas Neue usually only has 400 */
+    color: #333333;
+    letter-spacing: -0.5px;
+    text-transform: uppercase;
+}
+
+.body {
+    font-size: 1.125rem;
+    font-weight: 400;
+    color: #666666;
+    line-height: 1.8;
+    max-width: 800px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.showcase-continued {
+    padding-top: 80px;
+}
+
+/* Footer */
+footer {
+    padding: 60px 120px;
+    text-align: center;
+}
+
+footer p {
+    font-size: 0.95rem;
+    color: #666666;
+    font-weight: 300;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        padding: 60px 20px;
+    }
+
+    .main-logo {
+        height: 50px;
+        margin-bottom: 30px;
+    }
+
+    .header-info {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .info-right {
+        text-align: left;
+    }
+
+    .header-info p {
+        font-size: 1rem;
+    }
+
+    .showcase {
+        gap: 60px;
+        padding: 0 20px 20px;
+    }
+
+    .showcase-row {
+        grid-template-columns: 1fr;
+    }
+
+    .showcase-item {
+        gap: 20px;
+    }
+
+    .sub-heading {
+        font-size: 1.5rem;
+    }
+
+    .body {
+        font-size: 1rem;
+    }
+
+    footer {
+        padding: 40px 20px;
+    }
+
+    .scroll-slideshow-sticky {
+        padding: 0 20px;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fade-in from bottom animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.showcase-item,
+.showcase-row {
+    opacity: 0;
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.showcase-item:nth-child(1) { animation-delay: 0.05s; }
+.showcase-item:nth-child(2) { animation-delay: 0.1s; }
+.showcase-item:nth-child(3) { animation-delay: 0.15s; }
+.showcase-item:nth-child(4) { animation-delay: 0.2s; }
+.showcase-item:nth-child(5) { animation-delay: 0.25s; }
+.showcase-item:nth-child(6) { animation-delay: 0.3s; }
+.showcase-item:nth-child(7) { animation-delay: 0.35s; }
+.showcase-item:nth-child(8) { animation-delay: 0.4s; }
+
+.image-container {
+    opacity: 0;
+    animation: fadeInUp 0.4s ease-out forwards;
+}
+
+.showcase-item:nth-child(1) .image-container { animation-delay: 0.08s; }
+.showcase-item:nth-child(2) .image-container { animation-delay: 0.13s; }
+.showcase-item:nth-child(3) .image-container { animation-delay: 0.18s; }
+.showcase-item:nth-child(4) .image-container { animation-delay: 0.23s; }
+.showcase-item:nth-child(5) .image-container { animation-delay: 0.28s; }
+.showcase-item:nth-child(6) .image-container { animation-delay: 0.33s; }
+.showcase-item:nth-child(7) .image-container { animation-delay: 0.38s; }
+.showcase-item:nth-child(8) .image-container { animation-delay: 0.43s; }
+
+.sub-heading,
+.body {
+    opacity: 0;
+    animation: fadeInUp 0.3s ease-out forwards;
+}
+
+.showcase-item:nth-child(1) .sub-heading { animation-delay: 0.13s; }
+.showcase-item:nth-child(1) .body { animation-delay: 0.18s; }
+.showcase-item:nth-child(2) .sub-heading { animation-delay: 0.18s; }
+.showcase-item:nth-child(2) .body { animation-delay: 0.23s; }
+.showcase-item:nth-child(3) .sub-heading { animation-delay: 0.23s; }
+.showcase-item:nth-child(3) .body { animation-delay: 0.28s; }
+.showcase-item:nth-child(4) .sub-heading { animation-delay: 0.28s; }
+.showcase-item:nth-child(4) .body { animation-delay: 0.33s; }
+.showcase-item:nth-child(5) .sub-heading { animation-delay: 0.33s; }
+.showcase-item:nth-child(5) .body { animation-delay: 0.38s; }
+.showcase-item:nth-child(6) .sub-heading { animation-delay: 0.38s; }
+.showcase-item:nth-child(6) .body { animation-delay: 0.43s; }
+.showcase-item:nth-child(7) .sub-heading { animation-delay: 0.43s; }
+.showcase-item:nth-child(7) .body { animation-delay: 0.48s; }
+.showcase-item:nth-child(8) .sub-heading { animation-delay: 0.48s; }
+.showcase-item:nth-child(8) .body { animation-delay: 0.53s; }
+
+/* Iframe Section */
+.iframe-container {
+    width: 100%;
+}
+
+.iframe-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: none;
+    border-radius: 40px;
+    overflow: hidden;
+    position: relative;
+}
+
+.iframe-container iframe {
+    width: 133.33%;
+    height: 133.33%;
+    transform: scale(0.75);
+    transform-origin: 0 0;
+    border: none;
+}
+
+@media (max-width: 768px) {
+    .iframe-container {
+        padding: 0;
+    }
+
+    .iframe-wrapper {
+        aspect-ratio: 1 / 2;
+    }
+}
