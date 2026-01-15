@@ -102,4 +102,111 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Embedded content loaded successfully');
         });
     }
+
+    // --- Navigation Scroll Spy Logic ---
+    const navItems = document.querySelectorAll('.side-nav li');
+    const sections = {
+        'research': [],
+        'design': [],
+        'prototyping': [],
+        'design-pilot': []
+    };
+
+    // Helper to extract number from frame filename
+    function getFrameNumber(src) {
+        const match = src.match(/Frame-(\d+)\.png/i);
+        return match ? parseInt(match[1], 10) : -1;
+    }
+
+    // Categorize showcase items
+    document.querySelectorAll('.showcase-item').forEach(item => {
+        const img = item.querySelector('img');
+        if (img) {
+            const src = img.getAttribute('src');
+            
+            // Handle Hero Image explicitly (Frame.png without number)
+            if (src.includes('Frame.png')) {
+                item.dataset.section = 'intro';
+            } else {
+                const num = getFrameNumber(src);
+                if (num >= 1 && num <= 10) {
+                    sections['research'].push(item);
+                    item.dataset.section = 'research';
+                } else if (num >= 11 && num <= 16) {
+                    sections['design'].push(item);
+                    item.dataset.section = 'design';
+                } else if (num >= 17 && num <= 19) {
+                    sections['prototyping'].push(item);
+                    item.dataset.section = 'prototyping';
+                }
+            }
+        }
+    });
+
+    // Also observe the header as 'intro'
+    const header = document.querySelector('header');
+    if (header) {
+        header.dataset.section = 'intro';
+    }
+
+    // Handle "Design Pilot" (last showcase container items)
+    const showcaseContainers = document.querySelectorAll('.showcase');
+    if (showcaseContainers.length > 1) {
+        const lastContainer = showcaseContainers[showcaseContainers.length - 1];
+        Array.from(lastContainer.querySelectorAll('.showcase-item')).forEach(item => {
+            sections['design-pilot'].push(item);
+            item.dataset.section = 'design-pilot';
+        });
+    }
+
+    // Intersection Observer for Scroll Spy
+    const spyOptions = {
+        root: null,
+        // Trigger line is slightly above center to capture intent early or strictly center
+        rootMargin: '-45% 0px -55% 0px', 
+        threshold: 0
+    };
+
+    const spyObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const sectionId = entry.target.dataset.section;
+                if (sectionId) {
+                    updateActiveNav(sectionId);
+                }
+            }
+        });
+    }, spyOptions);
+
+    // Observe all categorized items plus intro items
+    Object.values(sections).flat().forEach(item => {
+        if (item) spyObserver.observe(item);
+    });
+    // Observe intro items specifically
+    document.querySelectorAll('[data-section="intro"]').forEach(item => {
+        spyObserver.observe(item);
+    });
+
+    function updateActiveNav(id) {
+        navItems.forEach(nav => {
+            if (id === 'intro') {
+                nav.classList.remove('active');
+            } else if (nav.dataset.target === id) {
+                nav.classList.add('active');
+            } else {
+                nav.classList.remove('active');
+            }
+        });
+    }
+
+    // Click to scroll handling
+    navItems.forEach(nav => {
+        nav.addEventListener('click', () => {
+            const targetId = nav.dataset.target;
+            const targetElements = sections[targetId];
+            if (targetElements && targetElements.length > 0) {
+                targetElements[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
 });
