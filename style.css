@@ -317,3 +317,41 @@ html {
         aspect-ratio: 1 / 2;
     }
 }
+/* Media Row - Video and Iframe side by side */
+.media-row {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    align-items: stretch;
+    margin-top: 20px;
+}
+
+.video-container {
+    flex: 0 0 35%;
+}
+
+.video-container video {
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    object-fit: cover;
+    border-radius: 40px;
+    display: block;
+}
+
+.media-row .iframe-container {
+    flex: 1;
+    width: auto;
+}
+
+.media-row .iframe-wrapper {
+    aspect-ratio: unset;
+    height: 100%;
+}
+
+@media (max-width: 768px) {
+    .media-row {
+        flex-direction: column;
+    }
+}
+
